@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Sistema de Encomendas</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+    </h:head>
+    <h:body>
+        <ui:insert name="menu">
+            <nav>
+                <ul class="menu">
+                    <a href="#"><li>Cadastrar Encomenda</li></a>
+                    <a href="#"><li>Editar Encomenda</li></a>
+                    <a href="#"><li>Gerenciar Encomenda</li></a>
+                </ul>
+            </nav>
+        </ui:insert>
+        <ui:insert name="content">
+            <h1>Cadastrar Encomenda</h1>
+            <h:form>
+                <label>
+                    Titulo:
+                    <h:inputText value="#{encomendaController.encomenda.titulo}" required="true"/>
+                </label><br/>
+                <label>
+                    Descricao:
+                    <h:inputTextarea value="#{encomendaController.encomenda.descricao}" 
+                                     rows="1" cols="30" required="true"/>
+                </label><br/>
+                <label>
+                    Data de Entrega:
+                    <h:inputText value="#{encomendaController.encomenda.entrega}" required="true">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:inputText>
+                </label>
+                <h:commandButton value="Adicionar" action="#{encomendaController.adicionarEncomenda()}" />
+            </h:form>
+
+            <h1>Encomendas Cadastradas</h1>
+            <h:dataTable class="table" var="encomenda" value="#{encomendaController.cadastrados()}" >
+                
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                        #{encomenda.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Titulo</f:facet>
+                        #{encomenda.titulo}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Descricao</f:facet>
+                        #{encomenda.descricao}
+                </h:column>
+                <h:column class="#{encomendaController.diasRestantes(encomenda)}">
+                    <f:facet name="header">Data de Entrega</f:facet>
+                        #{encomenda.entrega.toLocaleString().subSequence(0, 10)}
+                </h:column>
+                
+            </h:dataTable>
+        </ui:insert>
+    </h:body>
+</html>
+

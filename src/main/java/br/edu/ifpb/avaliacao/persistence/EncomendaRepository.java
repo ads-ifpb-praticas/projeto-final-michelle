@@ -2,6 +2,7 @@
 package br.edu.ifpb.avaliacao.persistence;
 
 import br.edu.ifpb.avaliacao.domain.Encomenda;
+import br.edu.ifpb.avaliacao.qualifier.RepositorioEncomenda;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import javax.persistence.EntityManager;
  * @since 26/10/2017
  */
 
+@RepositorioEncomenda
 public class EncomendaRepository implements Repository<Encomenda> {
 
     @Inject
@@ -46,7 +48,7 @@ public class EncomendaRepository implements Repository<Encomenda> {
 
     @Override
     public List<Encomenda> get() {
-        return manager.createQuery("FROM Encomenda e").getResultList();
+        return manager.createQuery("FROM Encomenda e ORDER BY e.entrega").getResultList();
     }
 
 }
