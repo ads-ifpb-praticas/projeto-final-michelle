@@ -1,6 +1,7 @@
 
 package br.edu.ifpb.avaliacao.service;
 
+import br.edu.ifpb.avaliacao.domain.Encomenda;
 import java.util.List;
 
 /**
@@ -10,12 +11,13 @@ import java.util.List;
  * @since 26/10/2017
  */
 
-public interface Service<T> {
+public interface Service {
     
-    void cadastrar(T t);
-    void editar(T t);
-    void remover(T t);
-    List<T> listar();
-    long diasRestantes(T t);
+    List<Encomenda> listar();
+    void cadastrar(Encomenda encomenda);
+    void editar(Encomenda encomenda);
+    void remover(Encomenda encomenda);
+    int diasRestantes(Encomenda encomenda);
+    void entregar(Encomenda encomenda);
     
 }

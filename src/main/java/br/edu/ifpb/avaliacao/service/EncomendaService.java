@@ -1,11 +1,13 @@
 
 package br.edu.ifpb.avaliacao.service;
 
+import br.edu.ifpb.avaliacao.conversor.ConversorData;
 import br.edu.ifpb.avaliacao.domain.Encomenda;
 import br.edu.ifpb.avaliacao.persistence.Repository;
 import br.edu.ifpb.avaliacao.qualifier.RepositorioEncomenda;
-import java.time.Duration;
+import br.edu.ifpb.avaliacao.qualifier.ServicoEncomenda;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -16,11 +18,15 @@ import javax.inject.Inject;
  * @since 26/10/2017
  */
 
-public class EncomendaService implements Service<Encomenda> {
+@ServicoEncomenda
+public class EncomendaService implements Service {
 
     @Inject
     @RepositorioEncomenda
     private Repository<Encomenda> repository;
+    
+    @Inject
+    private ConversorData conversor;
     
     @Override
     public void cadastrar(Encomenda encomenda) {
@@ -42,10 +48,16 @@ public class EncomendaService implements Service<Encomenda> {
         return repository.get();
     }
     
+    @Override
+    public int diasRestantes(Encomenda encomenda) {
+        LocalDate data = conversor.convert(encomenda.getEntrega());
+        return Period.between(LocalDate.now(), data).getDays();
+    }
     
     @Override
-    public long diasRestantes(Encomenda encomenda) {
-        return Duration.between(LocalDate.now(), encomenda.getEntrega())
-                       .toDays();
+    public void entregar(Encomenda encomenda) {
+        encomenda.setEntregue(true);
+        repository.edit(encomenda);
     }
+
 }

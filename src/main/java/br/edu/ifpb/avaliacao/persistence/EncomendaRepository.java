@@ -48,7 +48,7 @@ public class EncomendaRepository implements Repository<Encomenda> {
 
     @Override
     public List<Encomenda> get() {
-        return manager.createQuery("FROM Encomenda e").getResultList();
+        return manager.createQuery("FROM Encomenda e ORDER BY e.entrega").getResultList();
     }
 
 }

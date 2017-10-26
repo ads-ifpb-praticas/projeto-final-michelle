@@ -3,6 +3,7 @@ package br.edu.ifpb.avaliacao.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,15 +33,17 @@ public class Encomenda implements Serializable {
     @Column(length = 150)
     private String descricao;
     @Temporal(TemporalType.DATE)
-    private LocalDate entrega;
+    private Date entrega;
+    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean entregue;
 
     public Encomenda() {
     }
 
-    public Encomenda(String titulo, String descricao, LocalDate entrega) {
+    public Encomenda(String titulo, String descricao, Date entrega) {
         this.titulo = titulo;
         this.descricao = descricao;
-        this.entrega = entrega;
+        setEntrega(entrega);
     }
 
     public int getId() {
@@ -67,12 +70,21 @@ public class Encomenda implements Serializable {
         this.descricao = descricao;
     }
 
-    public LocalDate getEntrega() {
+    public Date getEntrega() {
         return entrega;
     }
 
-    public void setEntrega(LocalDate entrega) {
+    public void setEntrega(Date entrega) {
+        entrega.setDate(entrega.getDate() + 1);
         this.entrega = entrega;
+    }
+
+    public boolean isEntregue() {
+        return entregue;
+    }
+
+    public void setEntregue(boolean entregue) {
+        this.entregue = entregue;
     }
     
 }
