@@ -4,8 +4,6 @@ package br.edu.ifpb.avaliacao.controller;
 import br.edu.ifpb.avaliacao.domain.Encomenda;
 import br.edu.ifpb.avaliacao.qualifier.ServicoEncomenda;
 import br.edu.ifpb.avaliacao.service.Service;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -30,15 +28,21 @@ public class EncomendaController {
 
     public String adicionarEncomenda() {
         service.cadastrar(encomenda);
-        return null;
+        return "index?faces-redirect=true";
     }
     
     public List<Encomenda> cadastrados() {
         return service.listar();
     }
     
+    public String removeEncomenda(Encomenda encomenda) {
+        service.remover(encomenda);
+        return "index?faces-redirect=true";
+    }
+    
     public String diasRestantes(Encomenda encomenda) {
         int dias = service.diasRestantes(encomenda);
+        System.out.print("Number" + dias);
         if(dias > 5) {
             return "row-green";
         } else if (dias > 2) {

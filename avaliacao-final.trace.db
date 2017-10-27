@@ -1,7 +1,7 @@
-2017-10-26 16:02:38 jdbc[3]: exception
+2017-10-26 20:46:51 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Table "ENCOMENDA" not found; SQL statement:
 SELECT ID FROM ENCOMENDA WHERE ID <> ID [42102-196]
-2017-10-26 16:02:38 jdbc[3]: exception
+2017-10-26 20:46:51 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Sequence "ENCOMENDA_SEQ" not found; SQL statement:
 CALL NEXT VALUE FOR encomenda_seq [90036-196]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
@@ -120,12 +120,11 @@ CALL NEXT VALUE FOR encomenda_seq [90036-196]
 	at org.jboss.weld.injection.producer.ResourceInjector.inject(ResourceInjector.java:72)
 	at org.jboss.weld.injection.producer.BasicInjectionTarget.inject(BasicInjectionTarget.java:117)
 	at org.jboss.weld.bean.ManagedBean.create(ManagedBean.java:159)
-	at org.jboss.weld.context.AbstractContext.get(AbstractContext.java:96)
+	at org.jboss.weld.context.unbound.DependentContextImpl.get(DependentContextImpl.java:70)
 	at org.jboss.weld.bean.ContextualInstanceStrategy$DefaultContextualInstanceStrategy.get(ContextualInstanceStrategy.java:100)
-	at org.jboss.weld.bean.ContextualInstanceStrategy$CachingContextualInstanceStrategy.get(ContextualInstanceStrategy.java:177)
 	at org.jboss.weld.bean.ContextualInstance.get(ContextualInstance.java:50)
 	at org.jboss.weld.manager.BeanManagerImpl.getReference(BeanManagerImpl.java:785)
-	at org.jboss.weld.el.AbstractWeldELResolver.lookup(AbstractWeldELResolver.java:107)
+	at org.jboss.weld.el.AbstractWeldELResolver.lookup(AbstractWeldELResolver.java:120)
 	at org.jboss.weld.el.AbstractWeldELResolver.getValue(AbstractWeldELResolver.java:90)
 	at org.jboss.weld.environment.servlet.util.ForwardingELResolver.getValue(ForwardingELResolver.java:49)
 	at javax.el.CompositeELResolver.getValue(CompositeELResolver.java:67)

@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : miolivc
 */
 
+h1 {
+    color: crimson;
+}
+
 .menu li {
     list-style: none;
 }
