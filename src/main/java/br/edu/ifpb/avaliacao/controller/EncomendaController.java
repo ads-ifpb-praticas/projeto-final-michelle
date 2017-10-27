@@ -42,7 +42,6 @@ public class EncomendaController {
     
     public String diasRestantes(Encomenda encomenda) {
         int dias = service.diasRestantes(encomenda);
-        System.out.print("Number" + dias);
         if(dias > 5) {
             return "row-green";
         } else if (dias > 2) {
